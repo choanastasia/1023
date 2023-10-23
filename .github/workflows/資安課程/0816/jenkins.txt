@@ -1,0 +1,5 @@
+Jenkins docker
+
+1. docker run --name jenkins -d -u 0 -p 8080:8080 -p 50000:50000 -v /pack/jenkins:/var/jenkins_home jenkins/jenkins
+
+2. docker run --name jenkins -d -u 0 -p 8080:8080 -p 50000:50000 -v /pack/jenkins:/var/jenkins_home jenkins-gcc

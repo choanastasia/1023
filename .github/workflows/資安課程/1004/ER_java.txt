@@ -1,0 +1,151 @@
+(1)
+package exce1;
+import java.io.*;
+
+public class Exce1 {
+
+    public static void main(String[] args) {
+        String instr;
+        FileReader ff= new FileReader("mytext.txt");
+        BufferedReader bufferIn = new BufferedReader(ff);
+        
+        while((instr=bufferIn.readLine()) !=null)
+            System.out.println(instr);
+        
+        ff.close();
+    }
+}
+
+
+(2)
+package exce1;
+import java.io.*;
+
+public class Exce1 {
+
+    public static void main(String[] args) throws IOException {
+        String instr;
+        FileReader ff= new FileReader("mytext.txt");
+        BufferedReader bufferIn = new BufferedReader(ff);
+        
+        while((instr=bufferIn.readLine()) !=null)
+            System.out.println(instr);
+        
+        ff.close();
+    }
+}
+
+
+(3)
+
+package exce3;
+import java.io.*;
+import java.util.Random;
+public class Exce3 {
+
+    public static void main(String[] args) {
+       String instr;
+       long seed0;
+       try{       
+       FileReader ff= new FileReader("myseed.txt");
+       BufferedReader bufferIn = new BufferedReader(ff);
+       
+       instr=bufferIn.readLine();
+       seed0=Long.parseLong(instr);
+       long seed = System.currentTimeMillis();
+       Random rr= new Random(seed0+seed);    
+       System.out.println("The random number = " + rr.nextLong());
+       }
+       catch (Exception e){
+        Random rr = new Random(100);
+        System.out.println("The random number = " + rr.nextInt()); 
+       }
+        
+    }
+}
+
+(4)
+
+package exce2;
+import java.io.*;
+
+public class Exce2 {
+
+    public static void main(String[] args) {
+        String instr;
+        
+        try{
+        FileReader ff= new FileReader("mytext.txt");
+        BufferedReader bufferIn = new BufferedReader(ff);
+        
+        while((instr=bufferIn.readLine()) !=null)
+            System.out.println(instr);
+        
+        ff.close();
+        }
+        catch (IOException e){
+          //Ignore!!
+        }
+            
+    }
+}
+
+(5)
+
+package exce2;
+import java.io.*;
+
+public class Exce2 {
+
+    public static void main(String[] args) {
+        String instr;
+        
+        try{
+        FileReader ff= new FileReader("mytext.txt");
+        BufferedReader bufferIn = new BufferedReader(ff);
+        
+        while((instr=bufferIn.readLine()) !=null)
+            System.out.println(instr);
+        
+        ff.close();
+        }
+        catch (IOException e){
+          System.out.println(”File not found!!");   
+        }
+            
+    }
+}
+
+(6)
+package exce4;
+import java.io.*;
+
+public class Exce4 {
+
+    public static void main(String[] args) {
+        
+        FileReader reader = null;
+        try {
+            reader = new FileReader("someFile");
+            int i=0;
+            while(i != -1){
+                i = reader.read();
+                System.out.println((char) i );
+            }
+        } catch (IOException e) {
+            System.out.println("File Read Error!");
+            //do something clever with the exception
+        } finally {
+           System.out.println("File Close!");     
+           if(reader != null){
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    //do something clever with the exception
+                }
+            }
+            System.out.println("--- File End ---");
+        }
+    }
+}
+

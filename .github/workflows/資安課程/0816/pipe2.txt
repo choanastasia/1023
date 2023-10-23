@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Pull') {
+            steps {
+                sh 'if [ -d "flask-test" ]; then rm -R flask-test; fi'
+                sh 'git clone https://github.com/wangch64/flask-test.git'
+            }
+        }
+        stage('Run and Test') {
+            parallel {
+                stage('Service Run') {
+                    steps {
+                        sh 'nohup python3 flask-test/myform.py'
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        sleep(10)
+                        sh 'curl localhost:5000/myform'
+                    }
+                }
+            }
+        }    
+    }
+}

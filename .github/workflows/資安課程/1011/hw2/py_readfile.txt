@@ -1,0 +1,4 @@
+# python read (password) file
+
+with open('xxxpass.txt', 'r') as f:
+    userpass = f.read().strip()

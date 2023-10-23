@@ -1,0 +1,2 @@
+Github 的部分先使用
+https://github.com/wangch64/sechw1-pre.git

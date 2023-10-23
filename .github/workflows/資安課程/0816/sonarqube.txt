@@ -1,0 +1,16 @@
+About Sonarqube
+
+1. Sonarqube docker
+    
+    docker pull sonarqube
+    
+    docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+    
+    docker start sonarqube
+    docker stop sonarqube
+    
+    docker exec -u root -i -t sonarqube /bin/bash
+    
+2. SonarScanner
+   https://docs.sonarsource.com/sonarqube/latest/analyzing-source-code/scanners/sonarscanner/
+   

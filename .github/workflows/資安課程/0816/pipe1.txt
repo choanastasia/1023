@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull') {
+            steps {
+                git 'https://github.com/wangch64/test1.git'
+            }
+        }
+        stage('Make and Test') {
+            steps {
+                sh '''flawfinder my2.c
+                flawfinder te2.c
+                gcc my2.c -o my2
+                gcc te2.c -o te2'''
+            }
+        }
+        stage('Run') {
+            steps {
+                sh './my2'
+                sh './te2'
+            }
+        }
+    }
+}

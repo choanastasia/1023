@@ -1,0 +1,18 @@
+# Install command list
+
+## docker build jenkins image
+docker build -t jenkins-py -f jgcc3 .
+
+## docker run jenkins container
+docker run -d --name jenkins-py -u 0 -p 8080:8080 -p 5000:5000 -v /pack/jenkins:/var/jenkins_home jenkins-py
+
+## kill jenkins-py container
+docker stop jenkins-py
+docker rm jenkins-py
+sudo rm -rf /pack/jenkins
+
+## looking for jenkins log
+docker logs jenkins-py
+
+## docker run sonarqube continer
+docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube

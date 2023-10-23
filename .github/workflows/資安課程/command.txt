@@ -1,0 +1,23 @@
+# Command list
+
+-------------------------
+## jenkins
+> 帳號密碼: one / one
+> port: 8080
+
+### start jenkins
+docker start jenkins-py
+
+## stop jenkins
+docker stop jenkins-py
+
+-------------------------
+## sonarqube
+> 帳號密碼: admin / one
+> port: 9000
+
+### start sonarqube
+docker start sonarqube
+
+### stop sonarqube
+docker stop sonarqube

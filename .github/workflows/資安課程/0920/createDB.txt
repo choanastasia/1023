@@ -1,0 +1,8 @@
+create user 'newuser'@'localhost' identified by 'pass'; 
+grant all privileges on *.* to 'newuser'@'localhost'; 
+flush privileges;
+
+create database sample; 
+show databases; 
+use sample; 
+create table userdata(Name varchar(10), Country varchar(3)); insert into userdata (Name, Country) values ('Tony', 'US'), ('Steve','UK'), ('Mary', 'IN'); select * from userdata;

@@ -1,0 +1,539 @@
+----------------------
+Unsigned integer 相加
+----------------------
+#include <stdio.h>
+#include <limits.h>
+
+int main(){
+   unsigned int ui1=UINT_MAX-1, ui2=2, sum;
+
+   if (ui1 + ui2 > UINT_MAX){  //不可能發生
+       printf("too big error!!  (incorrect!)\n");
+   }
+   else{
+    sum=ui1+ui2;
+    printf("sum=%u   (incorrect!)\n", sum);
+   }
+   
+   if (ui1  > UINT_MAX - ui2){  //好的判斷方式
+       printf("too big error!!  (correct!)\n");
+   }
+   else{
+    sum=ui1+ui2;
+    printf("sum=%u   (correct!)\n", sum);
+   }
+   return 0;
+}
+
+----------------------
+C# Unsigned integer 相加
+----------------------
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        uint ui1 = uint.MaxValue - 1, ui2 = 2, sum;
+        checked
+        {
+            try
+            {
+                sum = ui1 + ui2;
+                Console.WriteLine("The answer is {0:d}.", sum);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Exception: {0:d} + {1:d} too big.", ui1, ui2);
+            }
+        }
+
+    }
+}
+
+----------------------
+Unsigned integer 相減
+----------------------
+
+#include <stdio.h>
+#include <limits.h>
+
+int main(){
+   unsigned int ui1=1, ui2=2, diff;
+
+   if (ui1 - ui2 < 0){  //不可能發生
+       printf("negative! error!!  (incorrect!)\n");
+   }
+   else{
+    diff=ui1-ui2;
+    printf("diff=%u   (incorrect!)\n", diff);
+   }
+   
+   if (ui2  > ui1){  //好的判斷方式
+       printf("negative! error!!  (correct!)\n");
+   }
+   else{
+    diff=ui1-ui2;
+    printf("diff=%u   (correct!)\n", diff);
+   }
+   return 0;
+}
+
+
+----------------------
+C# Unsigned integer 相減
+----------------------
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        uint ui1 = 1, ui2 = 2, diff;
+        checked
+        {
+            try
+            {
+                diff = ui1 - ui2;
+                Console.WriteLine("The answer is {0:d}.", diff);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Exception: {0:d} > {1:d}.", ui2, ui1);
+            }
+        }
+        
+    }
+}
+
+
+----------------------
+Signed integer 相加
+----------------------
+
+#include <stdio.h>
+#include <limits.h>
+
+int main(){
+  int si1=INT_MAX-1, si2=2, sum;
+
+   if ((si2>0 && si1+si2> INT_MAX) || 
+      (si2<0 && si1+si2 < INT_MIN)){ //不會發生
+       printf("too big or too small! error!  (incorrect)\n");
+   }
+   else{
+    sum=si1+si2;
+    printf("sum=%d  (incorrect)\n", sum);
+   }
+   
+   if ((si2>0 && si1> INT_MAX -si2) || 
+      (si2<0 && si1 < INT_MIN -si2)){ //好的判斷方式
+       printf("too big or too small! error!  (correct)\n");
+   }
+   else{
+    sum=si1+si2;
+    printf("sum=%d  (correct)\n", sum);
+   }
+   return 0;
+}
+
+
+----------------------
+C# Signed integer 相加
+----------------------
+
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        int si1 = int.MinValue + 1, si2 = -2, sum;
+        checked
+        {
+            try
+            {
+                sum = si1 + si2;
+                Console.WriteLine("The answer is {0:d}.", sum);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Exception: {0:d} + {1:d} overflow.", si1, si2);
+            }
+        }
+
+    }
+}
+
+
+----------------------
+Java Signed integer 相加
+----------------------
+
+class Overflow {
+    public static void main(String[] args) {
+        
+        int si1=Integer.MAX_VALUE-1, si2=2, sum;
+
+        if ((si2>0 && si1+si2> Integer.MAX_VALUE) || (si2<0 && si1+si2 < Integer.MIN_VALUE)){ 
+                System.out.println("too big or too small! error!  (incorrect)\n");
+        }
+        else{
+            sum=si1+si2;
+            System.out.println("sum="+sum+"  (incorrect)\n");
+         }
+   
+         if ((si2>0 && si1> Integer.MAX_VALUE -si2) || (si2<0 && si1 < Integer.MIN_VALUE -si2)){ 
+                System.out.println("too big or too small! error!  (correct)\n");
+        }
+        else{
+            sum=si1+si2;
+            System.out.println("sum="+sum+"  (correct)\n");
+        }
+
+    }
+}
+
+
+----------------------
+Signed integer 相減
+----------------------
+
+#include <stdio.h>
+#include <limits.h>
+
+int main(){
+  int si1=INT_MIN+1, si2=2, diff;
+
+   if ((si2>0 && si1-si2 < INT_MIN) || 
+      (si2<0 && si1-si2 > INT_MAX)){ //不會發生
+       printf("too big or too small! error!  (incorrect)\n");
+   }
+   else{
+    diff=si1-si2;
+    printf("diff=%d  (incorrect)\n", diff);
+   }
+   
+   if ((si2>0 && si1 < INT_MIN + si2) || 
+      (si2<0 && si1 > INT_MAX  + si2)){ //好的判斷方式
+       printf("too big or too small! error!  (correct)\n");
+   }
+   else{
+    diff=si1-si2;
+    printf("diff=%d  (correct)\n", diff);
+   }
+   return 0;
+}
+
+
+----------------------
+C# Signed integer 相減
+----------------------
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        int si1 = int.MinValue + 1, si2 = 2, diff;
+        checked
+        {
+            try
+            {
+                diff = si1 - si2;
+                Console.WriteLine("The answer is {0:d}.", diff);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Exception: {0:d} - {1:d} overflow.", si1, si2);
+            }
+        }
+
+    }
+}
+
+
+----------------------
+Java Signed integer 相減
+----------------------
+
+class Overflow2 {
+    public static void main(String[] args) {
+        
+        int si1=Integer.MIN_VALUE+1, si2=2, diff;
+
+        if ((si2>0 && si1-si2 < Integer.MIN_VALUE) || (si2<0 && si1-si2 > Integer.MAX_VALUE)){ 
+            System.out.println("too big or too small! error!  (incorrect)\n");
+        }
+        else{
+            diff=si1-si2;
+            System.out.println("diff="+diff+"  (incorrect)\n");
+        }
+   
+        if ((si2>0 && si1 < Integer.MIN_VALUE + si2) || (si2<0 && si1 > Integer.MAX_VALUE  + si2)){
+            System.out.println("too big or too small! error!  (correct)\n");
+        }
+        else{
+            diff=si1-si2;
+            System.out.println("diff="+diff+"  (correct)\n");
+        }
+
+    }
+}
+
+
+----------------------
+Unsigned integer 相乘
+----------------------
+
+#include <stdio.h>
+#include <limits.h>
+
+int main(){
+   unsigned int ui1=UINT_MAX-1, ui2=2, prod;
+       
+   if (ui2 !=0 && ui1  > UINT_MAX / ui2){  //好的判斷方式
+       printf("too big error!!  (correct!)\n");
+   }
+   else{
+    prod=ui1*ui2;
+    printf("prod=%u   (correct!)\n", prod);
+   }
+   return 0;
+}
+
+----------------------
+Signed integer 正負不平均
+----------------------
+
+
+#include <stdio.h>
+#include <limits.h>
+
+int myabs(int a){
+    if(a < 0)
+        a = -a;
+    return a;    
+}
+
+int main()
+{
+	printf("Answer=%d\n",myabs(INT_MIN));
+}
+
+
+----------------------
+C# Signed integer 正負不平均
+----------------------
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        int a = int.MinValue;
+        checked
+        {
+            try
+            {
+                if (a < 0)
+                    a = -a;
+                Console.WriteLine("The answer is {0:d}", a);
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Exception: - ({0:d}) overflow.", a);
+            }
+        }
+    }
+}
+
+
+----------------------
+Java Signed integer 正負不平均
+----------------------
+
+
+class Overflow3 {
+    public static void main(String[] args) {
+        int a = Integer.MIN_VALUE;
+        int b = -10;
+        System.out.println("Before: "+"a="+a+"  b="+b);
+        if (a < 0)
+            a = -a;
+        if (b < 0)
+            b = -b;    
+
+        System.out.println("After: "+"a="+a+"  b="+b);
+    }
+}
+
+----------------------
+Truncation Problem
+----------------------
+
+
+#include <stdio.h>
+#include <malloc.h>
+
+int main() {
+    unsigned int a1=65500, a2=36;
+    unsigned short total;
+    char *buffer = (char *)malloc(a1+a2+1);
+    unsigned num = malloc_usable_size(buffer);
+    printf("Allocated Size of buffer=%u\n", num);
+    
+    total = a1+a2+1;
+    char *buffer2 = (char *)malloc(total);
+    unsigned num2 = malloc_usable_size(buffer2);
+    printf("Allocated Size of buffer2=%u\n", num2);
+    
+
+    return 0;
+}
+
+
+----------------------
+Signed to Unsigned Conversion
+----------------------
+
+
+#include <stdio.h>
+
+int main()
+{
+  signed char sc = -1;
+  unsigned int uim = 4294967295;
+
+  if(sc==uim){   //signed char 轉成 unsigned int
+   puts("-1 與 4,294,967,295 是相等的!\n");
+  }
+  else{
+   puts("-1 不等於 4,294,967,295\n");   
+  }
+
+}
+
+
+----------------------
+C# Signed to Unsigned Conversion
+----------------------
+
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        sbyte sc = -1;
+        uint uim = 4294967295;
+
+        if ((uint)sc == uim)
+        {   //signed char 轉成 unsigned int
+            Console.WriteLine("-1 與 4,294,967,295 是相等的!\n");
+        }
+        else
+        {
+            Console.WriteLine("-1 不等於 4,294,967,295\n");
+        }
+    }
+}
+
+----------------------
+Integer Conversion 1
+----------------------
+
+#include <stdio.h>
+
+int main(){
+
+    if(sizeof(int) > -1)  //sizeof(int) 為 unsigned
+                          //因此兩者以 unsigned 方式進行比較
+       printf("True!\n");
+     else
+       printf("False\n");
+
+     printf("sizeof(int) = %d\n", sizeof(int));
+    return 0;
+}
+
+
+----------------------
+Integer Conversion 2 - C#
+----------------------
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        int x = -1;
+        if (sizeof(int) > (uint)x)  //sizeof(int) 為 unsigned
+                               //因此兩者以 unsigned 方式進行比較
+            Console.WriteLine("True!\n");
+        else
+            Console.WriteLine("False\n");
+
+        Console.WriteLine("sizeof(int) = {0:d}\n", sizeof(int));
+    }
+}
+
+
+----------------------
+Integer Conversion 3
+----------------------
+
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+  char test;
+  short conv;
+  unsigned short conv2;
+  unsigned int conv3;
+  int conv4, conv5;
+
+  test=0x9B; //10011011
+  conv=test;  //sign-extension
+  conv2=conv; //Loss of sign
+  conv3=conv; //sign-extension  convert int to unsigned int
+  conv4=conv2; //zero-extension
+  conv5=test;   //sign-extension
+
+  printf(" test=%d\n conv=%d\n conv2=%u\n conv3=%u\n conv4=%d\n conv5=%d\n", 
+  test, conv, conv2, conv3, conv4, conv5);
+  return 0;
+
+}
+
+----------------------
+C# Integer Conversion 3
+----------------------
+
+
+using System;
+class Program
+{
+    static void Main()
+    {
+        sbyte test;
+        short conv;
+        ushort conv2;
+        uint conv3;
+        int conv4, conv5;
+
+        test = -101; //10011011
+        conv = test;  //sign-extension (safe)
+        conv2 = (ushort)conv; //Loss of sign
+        conv3 = (uint)conv; //sign-extension  convert int to unsigned int
+        conv4 = conv2; //zero-extension  (safe)
+        conv5 = test;   //sign-extension  (safe)
+
+        Console.WriteLine(" test={0:d}\n conv={1:d}\n conv2={2:d}\n conv3={3:d}\n conv4={4:d}\n conv5={5:d}\n",
+        test, conv, conv2, conv3, conv4, conv5);
+    }
+}
+

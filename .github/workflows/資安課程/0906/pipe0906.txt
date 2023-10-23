@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    stages {
+        stage('Hello') {
+            steps {
+                echo 'Hello World'
+                git url: 'https://github.com/wangch64/ase1.git/',
+                branch: 'main'
+            }
+        }    
+        stage('Pull and Test') {
+            environment {
+                sonarHome = tool 'SonaScanner'
+            }
+            steps{
+                sh 'if [ -d "ase1" ]; then rm -R ase1; fi'
+                sh 'git clone https://github.com/wangch64/ase1.git'
+                withSonarQubeEnv('Local'){
+                    echo "Start Scanning now"
+                    dir("ase1"){
+                        sh "${sonarHome}/sonar-scanner-5.0.1.3006-linux/bin/sonar-scanner -Dsonar.projectKey=atest"
+                     }
+                }
+                
+            }
+        }    
+    }
+}

@@ -1,0 +1,5 @@
+DVWA
+docker run --name dvwa -d -it -p 80:80 vulnerables/web-dvwa
+
+bwapp
+docker run --name bwapp -d -p 8081:80 raesene/bwapp
